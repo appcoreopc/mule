@@ -24,6 +24,7 @@ import static org.mule.runtime.api.meta.model.tck.TestHttpConnectorDeclarer.REQU
 import static org.mule.runtime.api.meta.model.tck.TestHttpConnectorDeclarer.STATIC_RESOURCE_OPERATION_NAME;
 import static org.mule.runtime.api.meta.model.tck.TestHttpConnectorDeclarer.VENDOR;
 import static org.mule.runtime.api.meta.model.tck.TestHttpConnectorDeclarer.VERSION;
+import static org.mule.runtime.extension.api.ExtensionConstants.TARGET_PARAMETER_NAME;
 import org.mule.metadata.api.model.BinaryType;
 import org.mule.metadata.api.model.NumberType;
 import org.mule.metadata.api.model.ObjectType;
@@ -43,6 +44,7 @@ import org.mule.tck.size.SmallTest;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -119,10 +121,18 @@ public class ComplexExtensionDeclarationTestCase extends AbstractJavaExtensionDe
         extensionModel.getConfigurationModel(REQUESTER_CONFIG_NAME).get().getOperationModel(REQUEST_OPERATION_NAME).get();
     assertThat(operation.getName(), is(REQUEST_OPERATION_NAME));
     assertDataType(operation.getOutput().getType(), InputStream.class, BinaryType.class);
-    assertThat(operation.getAllParameterModels(), hasSize(1));
+    assertThat(operation.getAllParameterModels(), hasSize(2));
 
     ParameterModel parameter = operation.getAllParameterModels().get(0);
+    assertTargetParameter(parameter);
+
+    parameter = operation.getAllParameterModels().get(1);
     assertThat(parameter.getName(), is(PATH));
+    assertDataType(parameter.getType(), String.class, StringType.class);
+  }
+
+  private void assertTargetParameter(ParameterModel parameter) {
+    assertThat(parameter.getName(), is(TARGET_PARAMETER_NAME));
     assertDataType(parameter.getType(), String.class, StringType.class);
   }
 
@@ -131,9 +141,12 @@ public class ComplexExtensionDeclarationTestCase extends AbstractJavaExtensionDe
     OperationModel operation = extensionModel.getOperationModel(STATIC_RESOURCE_OPERATION_NAME).get();
     assertThat(operation.getName(), is(STATIC_RESOURCE_OPERATION_NAME));
     assertDataType(operation.getOutput().getType(), InputStream.class, BinaryType.class);
-    assertThat(operation.getAllParameterModels(), hasSize(1));
+    final List<ParameterModel> parameters = operation.getAllParameterModels();
+    assertThat(parameters, hasSize(2));
 
-    ParameterModel parameter = operation.getAllParameterModels().get(0);
+    assertTargetParameter(parameters.get(0));
+
+    ParameterModel parameter = parameters.get(1);
     assertThat(parameter.getName(), is(PATH));
     assertDataType(parameter.getType(), String.class, StringType.class);
   }

@@ -7,8 +7,6 @@
 
 package org.mule.runtime.module.extension.internal.xml;
 
-import org.mule.runtime.extension.api.ExtensionConstants;
-
 import javax.xml.namespace.QName;
 
 public final class SchemaConstants {
@@ -93,13 +91,8 @@ public final class SchemaConstants {
   public static final String UNBOUNDED = "unbounded";
   public static final String MAX_ONE = "1";
   public static final String ATTRIBUTE_NAME_NAME = "name";
-  public static final String XSD_EXTENSION = ".xsd";
   public static final String DISABLE_VALIDATION = "disableValidation";
   public static final String CURRENT_VERSION = "current";
 
-  /**
-   * Human friendly description for {@link ExtensionConstants#TARGET_ATTRIBUTE}
-   */
-  public static final String TARGET_ATTRIBUTE_DESCRIPTION =
-      "The name of a variable on which the operation's output will be placed";
+  private SchemaConstants() {}
 }
