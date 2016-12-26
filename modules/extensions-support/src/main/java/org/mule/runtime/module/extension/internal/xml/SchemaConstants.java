@@ -7,7 +7,7 @@
 
 package org.mule.runtime.module.extension.internal.xml;
 
-import org.mule.runtime.module.extension.internal.ExtensionProperties;
+import org.mule.runtime.extension.api.ExtensionConstants;
 
 import javax.xml.namespace.QName;
 
@@ -56,8 +56,6 @@ public final class SchemaConstants {
   public static final QName MULE_ABSTRACT_MESSAGE_SOURCE = new QName(MULE_NAMESPACE, "abstract-message-source", MULE_PREFIX);
   public static final QName MULE_ABSTRACT_RECONNECTION_STRATEGY =
       new QName(MULE_NAMESPACE, "abstract-reconnection-strategy", MULE_PREFIX);
-  public static final QName MULE_ABSTRACT_RECONNECTION_STRATEGY_TYPE =
-      new QName(MULE_NAMESPACE, "abstractReconnectionStrategyType", MULE_PREFIX);
   public static final QName MULE_MESSAGE_PROCESSOR_TYPE =
       new QName(MULE_NAMESPACE, "messageProcessorOrMixedContentMessageProcessor", MULE_PREFIX);
   public static final QName TLS_CONTEXT_TYPE = new QName(MULE_TLS_NAMESPACE, "context", "tls");
@@ -79,7 +77,6 @@ public final class SchemaConstants {
   public static final QName EXPRESSION_INTEGER = new QName(MULE_NAMESPACE, "expressionInt", MULE_PREFIX);
   public static final QName EXPRESSION_DOUBLE = new QName(MULE_NAMESPACE, "expressionDouble", MULE_PREFIX);
   public static final QName EXPRESSION_DECIMAL = new QName(MULE_NAMESPACE, "expressionDecimal", MULE_PREFIX);
-  public static final QName EXPRESSION_OBJECT = new QName(MULE_NAMESPACE, "expressionObject", MULE_PREFIX);
   public static final QName EXPRESSION_LIST = new QName(MULE_NAMESPACE, "expressionList", MULE_PREFIX);
   public static final QName EXPRESSION_MAP = new QName(MULE_NAMESPACE, "expressionMap", MULE_PREFIX);
   public static final QName EXPRESSION_DATE_TIME = new QName(MULE_NAMESPACE, "expressionDateTime", MULE_PREFIX);
@@ -101,7 +98,7 @@ public final class SchemaConstants {
   public static final String CURRENT_VERSION = "current";
 
   /**
-   * Human friendly description for {@link ExtensionProperties#TARGET_ATTRIBUTE}
+   * Human friendly description for {@link ExtensionConstants#TARGET_ATTRIBUTE}
    */
   public static final String TARGET_ATTRIBUTE_DESCRIPTION =
       "The name of a variable on which the operation's output will be placed";
