@@ -5400,7 +5400,7 @@
                 </xsd:attribute>
                 <xsd:attribute name="evictionCheckIntervalMillis" type="xsd:string">
                     <xsd:annotation>
-                        <xsd:documentation>Specifies the number of milliseconds between runs of the object evictor. When non-positive, no object evictor is executed..</xsd:documentation>
+                        <xsd:documentation>Specifies the number of milliseconds between runs of the object evictor. When non-positive, no object evictor is executed.</xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
                 <xsd:attribute name="minEvictionMillis" type="xsd:string">
