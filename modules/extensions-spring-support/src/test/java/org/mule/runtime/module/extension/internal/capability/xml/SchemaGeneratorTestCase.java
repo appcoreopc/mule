@@ -120,7 +120,6 @@ public class SchemaGeneratorTestCase extends AbstractMuleTestCase {
     XmlDslModel languageModel = extensionUnderTest.getXmlDslModel();
 
     String schema = generator.generate(extensionUnderTest, languageModel, new SchemaTestDslContext());
-    org.mule.runtime.core.util.FileUtils.writeStringToFile(new java.io.File(extensionUnderTest.getName().concat(".xsd")), schema);
     compareXML(expectedSchema, schema);
   }
 
