@@ -313,7 +313,8 @@ public abstract class ExtensionDefinitionParser {
     final MetadataType valueType = dictionaryType.getValueType();
     final Class<?> keyClass = getType(keyType);
     final Class<?> valueClass = getType(valueType);
-    final String parameterName = paramDsl.getAttributeName();
+
+    final String parameterName = paramDsl.getAttributeName().orElse(name);
     final String mapElementName = paramDsl.getElementName();
 
     addParameter(getChildKey(key), fromChildMapConfiguration(keyClass, valueClass).withWrapperIdentifier(mapElementName)

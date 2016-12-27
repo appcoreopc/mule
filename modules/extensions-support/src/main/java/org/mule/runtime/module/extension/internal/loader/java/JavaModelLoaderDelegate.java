@@ -275,7 +275,7 @@ public final class JavaModelLoaderDelegate {
       return false;
     }
 
-    final String groupName = groupAnnotation.value();
+    final String groupName = groupAnnotation.name();
     if (DEFAULT_GROUP_NAME.equals(groupName)) {
       throw new IllegalParameterModelDefinitionException(
                                                          format("%s '%s' defines parameter group of name '%s' which is the default one. "
@@ -331,6 +331,8 @@ public final class JavaModelLoaderDelegate {
       declarer.withExclusiveOptionals(optionalParamNames, annotation.isOneRequired());
     });
 
+
+    declarer.withInlineDefinition(groupAnnotation.showInline());
 
     MuleExtensionAnnotationParser.parseLayoutAnnotations(groupParameter, LayoutModel.builder()).ifPresent(declarer::withLayout);
 

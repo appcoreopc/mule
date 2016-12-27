@@ -194,7 +194,7 @@ public class ParameterModelValidatorTestCase extends AbstractMuleTestCase {
 
   public static class InvalidPojoParameterGroup {
 
-    @ParameterGroup("exclusion")
+    @ParameterGroup(name = "exclusion")
     private Serializable nonInstantiableField;
   }
 

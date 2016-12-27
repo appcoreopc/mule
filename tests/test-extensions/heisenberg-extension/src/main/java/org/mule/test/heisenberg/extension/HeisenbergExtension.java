@@ -113,10 +113,10 @@ public class HeisenbergExtension implements Lifecycle, MuleContextAware {
   @Optional
   private Map<String, List<String>> deathsBySeasons;
 
-  @ParameterGroup(RICIN_GROUP_NAME)
+  @ParameterGroup(name = RICIN_GROUP_NAME)
   private RicinGroup ricinGroup;
 
-  @ParameterGroup(PERSONAL_INFORMATION_GROUP_NAME)
+  @ParameterGroup(name = PERSONAL_INFORMATION_GROUP_NAME)
   private PersonalInfo personalInfo = new PersonalInfo();
 
   @Parameter

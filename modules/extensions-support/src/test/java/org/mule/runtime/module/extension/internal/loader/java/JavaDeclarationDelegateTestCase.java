@@ -769,7 +769,7 @@ public class JavaDeclarationDelegateTestCase extends AbstractJavaExtensionDeclar
   @Extension(name = OTHER_HEISENBERG, description = EXTENSION_DESCRIPTION)
   public static class HeisenbergWithParameterGroupAsOptional extends HeisenbergExtension {
 
-    @ParameterGroup("personalInfo")
+    @ParameterGroup(name = "personalInfo")
     @Optional
     private PersonalInfo personalInfo;
 
@@ -778,7 +778,7 @@ public class JavaDeclarationDelegateTestCase extends AbstractJavaExtensionDeclar
   @Extension(name = OTHER_HEISENBERG, description = EXTENSION_DESCRIPTION)
   public static class HeisenbergWithRecursiveParameterGroup extends HeisenbergExtension {
 
-    @ParameterGroup("recursive")
+    @ParameterGroup(name = "recursive")
     private RecursiveParameterGroup group;
   }
 
@@ -854,7 +854,7 @@ public class JavaDeclarationDelegateTestCase extends AbstractJavaExtensionDeclar
 
   private static class RecursiveParameterGroup {
 
-    @ParameterGroup("recursive")
+    @ParameterGroup(name = "recursive")
     private RecursiveParameterGroup recursiveParameterGroup;
   }
 }

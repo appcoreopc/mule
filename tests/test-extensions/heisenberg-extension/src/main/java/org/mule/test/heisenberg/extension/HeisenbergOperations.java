@@ -99,7 +99,7 @@ public class HeisenbergOperations {
     return killWithCustomMessage(new KillParameters(victim, goodbyeMessage));
   }
 
-  public String killWithCustomMessage(@ParameterGroup(KILL_WITH_GROUP) KillParameters killParameters) {
+  public String killWithCustomMessage(@ParameterGroup(name = KILL_WITH_GROUP) KillParameters killParameters) {
     return format("%s, %s", killParameters.getGoodbyeMessage(), killParameters.getVictim());
   }
 
@@ -150,7 +150,8 @@ public class HeisenbergOperations {
     config.setMoney(config.getMoney().add(BigDecimal.valueOf(payment)));
   }
 
-  public String alias(@Example(OPERATION_PARAMETER_EXAMPLE) String greeting, @ParameterGroup("Personal Info") PersonalInfo info) {
+  public String alias(@Example(OPERATION_PARAMETER_EXAMPLE) String greeting,
+                      @ParameterGroup(name = "Personal Info") PersonalInfo info) {
     return String.format("%s, my name is %s and I'm %d years old", greeting, info.getName(), info.getAge());
   }
 
