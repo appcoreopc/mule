@@ -6,23 +6,21 @@
  */
 package org.mule.runtime.module.cxf.transport;
 
-import static org.apache.cxf.message.Message.DECOUPLED_CHANNEL_MESSAGE;
 import static org.mule.runtime.api.metadata.MediaType.XML;
 import static org.mule.runtime.core.DefaultEventContext.create;
 import static org.mule.runtime.core.api.Event.setCurrentEvent;
-
+import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.api.i18n.I18nMessageFactory;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.core.api.DefaultMuleException;
-import org.mule.runtime.core.api.MuleContext;
 import org.mule.runtime.core.api.Event;
-import org.mule.runtime.api.exception.MuleException;
-import org.mule.runtime.core.api.message.InternalMessage;
+import org.mule.runtime.core.api.MuleContext;
 import org.mule.runtime.core.api.construct.FlowConstruct;
 import org.mule.runtime.core.api.exception.MessagingExceptionHandler;
 import org.mule.runtime.core.api.lifecycle.LifecycleState;
+import org.mule.runtime.core.api.message.InternalMessage;
 import org.mule.runtime.core.api.transformer.TransformerException;
-import org.mule.runtime.api.i18n.I18nMessageFactory;
 import org.mule.runtime.core.management.stats.FlowConstructStatistics;
 import org.mule.runtime.core.message.OutputHandler;
 import org.mule.runtime.module.cxf.CxfConfiguration;
@@ -35,7 +33,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PushbackInputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.logging.Logger;
 
@@ -46,14 +43,12 @@ import org.apache.cxf.common.logging.LogUtils;
 import org.apache.cxf.endpoint.ClientImpl;
 import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.message.Exchange;
-import org.apache.cxf.message.ExchangeImpl;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.message.MessageImpl;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.service.model.EndpointInfo;
 import org.apache.cxf.transport.AbstractConduit;
-import org.apache.cxf.transport.MessageObserver;
 import org.apache.cxf.ws.addressing.AttributedURIType;
 import org.apache.cxf.ws.addressing.EndpointReferenceType;
 import org.apache.cxf.wsdl.EndpointReferenceUtils;
@@ -351,29 +346,6 @@ public class MuleUniversalConduit extends AbstractConduit {
       ref = t;
     }
     return ref;
-  }
-
-  /**
-   * Used to set appropriate message properties, exchange etc. as required for an incoming decoupled response (as opposed what's
-   * normally set by the Destination for an incoming request).
-   */
-  protected class InterposedMessageObserver implements MessageObserver {
-
-    /**
-     * Called for an incoming message.
-     * 
-     * @param inMessage
-     */
-    @Override
-    public void onMessage(Message inMessage) {
-      // disposable exchange, swapped with real Exchange on correlation
-      inMessage.setExchange(new ExchangeImpl());
-      inMessage.put(DECOUPLED_CHANNEL_MESSAGE, Boolean.TRUE);
-      inMessage.put(Message.RESPONSE_CODE, HttpURLConnection.HTTP_OK);
-      inMessage.remove(Message.ASYNC_POST_RESPONSE_DISPATCH);
-
-      incomingObserver.onMessage(inMessage);
-    }
   }
 
   public void setCloseInput(boolean closeInput) {
